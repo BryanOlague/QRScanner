@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@keyframes scanner {
+  0% {
+    top: 8%;
+  }
+
+  50% {
+    top: 92%;
+  }
+
+  100% {
+    top: 8%;
+  }
+}
+
+.scan-line {
+  animation: scanner 2.5s linear infinite;
+
+  box-shadow:
+    0 0 15px cyan,
+    0 0 30px cyan;
+}
+
+video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
