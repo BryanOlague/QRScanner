@@ -8,6 +8,10 @@ import user from "../../public/icons/user.png";
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const handleNavigate = () => {
+    setMenuOpen(false);
+  };
+
   const linkClass = (isActive: boolean) =>
     isActive
       ? "bg-[#22C55E] text-white px-4 py-2 rounded-full font-semibold transition-all duration-300"
@@ -161,7 +165,11 @@ export default function NavBar() {
               "
           >
             <li>
-              <NavLink to="/" className={({ isActive }) => linkClass(isActive)}>
+              <NavLink
+                to="/"
+                onClick={handleNavigate}
+                className={({ isActive }) => linkClass(isActive)}
+              >
                 Home
               </NavLink>
             </li>
@@ -169,6 +177,7 @@ export default function NavBar() {
             <li>
               <NavLink
                 to="/qrScanner"
+                onClick={handleNavigate}
                 className={({ isActive }) => linkClass(isActive)}
               >
                 QRScanner
@@ -178,6 +187,7 @@ export default function NavBar() {
             <li>
               <NavLink
                 to="/information"
+                onClick={handleNavigate}
                 className={({ isActive }) => linkClass(isActive)}
               >
                 Information

@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import QRScanner from "../components/QRScanner";
-import Sidebar from "../components/SideBar";
-import RegisterCard from "../components/RegisterCard";
+// import Sidebar from "../components/SideBar";
 
 export default function AppRouter() {
   return (
@@ -9,8 +8,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<p>Inico</p>} />
         <Route path="/qrScanner" element={<QRScanner />} />
-        <Route path="/information" element={<Sidebar />} />
-        <Route path="/register" element={<RegisterCard />} />
+        {/* <Route path="/information" element={<Sidebar />} /> */}
       </Routes>
     </>
   );
