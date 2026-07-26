@@ -73,11 +73,7 @@ export default function Sidebar() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed
-          top-0
-          left-0
-          z-40
-          h-screen
+          h-full
           w-72
           bg-white
           border-r
