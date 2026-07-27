@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
-import { Copy, RotateCcw, ExternalLink } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function QRScanner() {
   const [result, setResult] = useState<string>("");
 
   const [scanned, setScanned] = useState(false);
+
+    const navigate = useNavigate();
 
   const handleScan = (detectedCodes: any[]) => {
     if (!detectedCodes.length) return;
@@ -20,6 +22,9 @@ export default function QRScanner() {
       setResult(value);
 
       setScanned(true);
+
+      navigate("/register", { state: { qrValue: value } });
+
     }
   };
 
@@ -212,94 +217,7 @@ export default function QRScanner() {
 
       {/* ================= RESULTADO ================= */}
 
-      {result && (
-        <div
-          className="
-              absolute
-              bottom-5
-              left-1/2
-              z-30
-              w-[90%]
-              max-w-md
-              -translate-x-1/2
-              rounded-2xl
-              bg-white
-              p-5
-              shadow-2xl
-            "
-        >
-          <h2
-            className="
-                font-bold
-                text-gray-800
-              "
-          >
-            Código detectado
-          </h2>
 
-          <p
-            className="
-                mt-2
-                break-all
-                text-sm
-                text-gray-600
-              "
-          >
-            {result}
-          </p>
-
-          <div
-            className="
-                mt-4
-                flex
-                gap-3
-              "
-          >
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(result);
-              }}
-              className="
-                  flex-1
-                  rounded-xl
-                  bg-blue-600
-                  py-3
-                  text-white
-                "
-            >
-              <Copy className="mx-auto" size={20} />
-            </button>
-
-            <button
-              onClick={resetScanner}
-              className="
-                  flex-1
-                  rounded-xl
-                  bg-green-600
-                  py-3
-                  text-white
-                "
-            >
-              <RotateCcw className="mx-auto" size={20} />
-            </button>
-
-            {result.startsWith("http") && (
-              <button
-                onClick={() => window.open(result)}
-                className="
-                      flex-1
-                      rounded-xl
-                      bg-cyan-600
-                      py-3
-                      text-white
-                    "
-              >
-                <ExternalLink className="mx-auto" size={20} />
-              </button>
-            )}
-          </div>
-        </div>
-      )}
     </main>
   );
 }
