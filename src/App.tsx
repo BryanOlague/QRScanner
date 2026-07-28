@@ -9,17 +9,17 @@ export default function App() {
   const showSidebar = location.pathname === "/information";
 
   return (
-    <div className="flex h-screen">
-      {showSidebar && <Sidebar />}
+    <div className="flex flex-col h-screen">
+      <NavBar />
 
-      <div className="flex flex-col flex-1">
-        <NavBar />
+      <div className="flex flex-1 overflow-hidden">
+        {showSidebar && <Sidebar />}
 
         <main
           className={`
             flex-1
             overflow-y-auto
-            ${showSidebar ? "md:ml-72" : ""}
+            
           `}
         >
           <AppRouter />
