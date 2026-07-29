@@ -1,36 +1,126 @@
+import { useLocation, Navigate } from "react-router-dom";
+
+type LocationState = {
+  qrValue: string;
+};
 
 export default function RegisterCard() {
-    return (
-        <div className="bg-gray-100 flex items-center justify-center h-screen" >
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-                <div className="flex justify-center mb-6">
-                    <span className="inline-block bg-gray-200 rounded-full p-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" /></svg>
-                    </span>
-                </div>
-                <h2 className="text-2xl font-semibold text-center mb-4">Create a new account </h2>
-                <p className="text-gray-600 text-center mb-6">Enter your details to register.</p>
-                <form>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-semibold mb-2">Full Name *</label>
-                        <input type="text" id="fullName" className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500" required placeholder="James Brown"/>
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-semibold mb-2">Email Address *</label>
-                        <input type="email" id="email" className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500" required placeholder="hello@alignui.com"/>
-                    </div>
-                    <div className="mb-6">
-                        <label  className="block text-gray-700 text-sm font-semibold mb-2">Password *</label>
-                        <input type="text" id="password" className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500" required placeholder="••••••••"/>
-                            <p className="text-gray-600 text-xs mt-1">Must contain 1 uppercase letter, 1 number, min. 8 characters.</p>
-                    </div>
-                    <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Register</button>
-                    <p className="text-gray-600 text-xs text-center mt-4">
-                        By clicking Register, you agree to accept Apex Financial's
-                        <a href="#" className="text-blue-500 hover:underline">Terms and Conditions</a>.
-                    </p>
-                </form>
-            </div>
-</div >
-    );
+  const location = useLocation();
+  const state = location.state as LocationState | null;
+
+  if (!state?.qrValue) {
+    return <Navigate to="/qrScanner" replace />;
+  }
+
+  const { qrValue } = state;
+
+  return (
+    <div className="bg-[#DCFCE7] flex items-center justify-center min-h-screen px-4 py-8 sm:px-6">
+      <div className="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-xl w-full max-w-sm sm:max-w-md border-t-4 border-[#22C55E]">
+        {/* ================= HEADER ================= */}
+        <div className="text-center mb-6 sm:mb-8">
+          <span className="inline-block bg-[#DCFCE7] text-[#166534] text-xs sm:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+            Código escaneado
+          </span>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 break-words">
+            {qrValue}
+          </h2>
+          <p className="text-gray-500 text-sm sm:text-base mt-2">
+            Ingrese la información requerida
+          </p>
+        </div>
+
+        {/* ================= FORM ================= */}
+        <form className="space-y-4 sm:space-y-5">
+          <div>
+            <label
+              htmlFor="fullName"
+              className="block text-gray-700 text-sm font-semibold mb-1.5"
+            >
+              Primera pregunta *
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              required
+              placeholder="Primera pregunta"
+              className="
+                w-full px-4 py-2.5
+                border border-gray-300 rounded-lg
+                text-gray-700 text-sm sm:text-base
+                transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:border-[#22C55E]
+              "
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-gray-700 text-sm font-semibold mb-1.5"
+            >
+              Segunda pregunta *
+            </label>
+            <input
+              type="text"
+              id="email"
+              required
+              placeholder="Segunda pregunta"
+              className="
+                w-full px-4 py-2.5
+                border border-gray-300 rounded-lg
+                text-gray-700 text-sm sm:text-base
+                transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:border-[#22C55E]
+              "
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-gray-700 text-sm font-semibold mb-1.5"
+            >
+              Tercera pregunta
+            </label>
+            <input
+              type="text"
+              id="password"
+              required
+              placeholder="Tercera pregunta"
+              className="
+                w-full px-4 py-2.5
+                border border-gray-300 rounded-lg
+                text-gray-700 text-sm sm:text-base
+                transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:border-[#22C55E]
+              "
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="
+              w-full bg-[#22C55E] text-white font-semibold
+              px-4 py-2.5 sm:py-3 rounded-full
+              transition-all duration-300
+              hover:bg-[#16A34A]
+              focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-offset-2
+              active:scale-[0.98]
+            "
+          >
+            Register
+          </button>
+
+          <p className="text-gray-500 text-xs text-center mt-4 leading-relaxed">
+            By clicking Register, you agree to accept Apex Financial&apos;s{" "}
+            <a href="#" className="text-[#166534] font-medium hover:underline">
+              Terms and Conditions
+            </a>
+            .
+          </p>
+        </form>
+      </div>
+    </div>
+  );
 }
