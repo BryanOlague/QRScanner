@@ -77,9 +77,7 @@ export default function NavBar() {
             <span className="font-serif text-lg lg:text-xl font-semibold text-[#1E4536]">
               Hacienda Fresh
             </span>
-            <span className="text-[11px] tracking-wide text-[#8A9A8D]">
-              De la finca a tu mesa
-            </span>
+            <span className="text-[11px] tracking-wide text-[#8A9A8D]"></span>
           </div>
         </div>
 
