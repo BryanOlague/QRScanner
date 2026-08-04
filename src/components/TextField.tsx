@@ -19,9 +19,10 @@ export function TextField({
     <div>
       <label
         htmlFor={id}
-        className="block text-gray-700 text-sm font-semibold mb-1.5"
+        className="block text-[#4C6355] text-xs sm:text-sm font-semibold mb-1.5"
       >
-        {label} {required && "*"}
+        {label}
+        {required && <span className="text-[#BB6B4C] ml-0.5">*</span>}
       </label>
       <input
         type="text"
@@ -32,10 +33,11 @@ export function TextField({
         onChange={(e) => onChange(e.target.value)}
         className="
           w-full px-4 py-2.5
-          border border-gray-300 rounded-lg
-          text-gray-700 text-sm sm:text-base
-          transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:border-[#22C55E]
+          bg-[#FBF7EE] border border-[#E4DDC9] rounded-xl
+          text-[#2F4A3D] text-sm sm:text-base
+          placeholder:text-[#A9B6AC]
+          transition-colors duration-300
+          focus:outline-none focus:bg-white focus:border-[#4C9A6A] focus:ring-2 focus:ring-[#4C9A6A]/30
         "
       />
     </div>

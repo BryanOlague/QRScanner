@@ -39,45 +39,47 @@ export default function FormCard<T extends Record<string, unknown>>({
   };
 
   return (
-    <div className="bg-[#DCFCE7] flex items-center justify-center min-h-screen px-4 py-8 sm:px-6">
-      <div className="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-xl w-full max-w-sm sm:max-w-md border-t-4 border-[#22C55E]">
-        <div className="text-center mb-6 sm:mb-8">
-          {badge && (
-            <span className="inline-block bg-[#DCFCE7] text-[#166534] text-xs sm:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-              {badge}
-            </span>
-          )}
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 break-words">
-            {title}
-          </h2>
-          {subtitle && (
-            <p className="text-gray-500 text-sm sm:text-base mt-2">
-              {subtitle}
-            </p>
-          )}
+    <div className="bg-[#EEF1E3] flex items-center justify-center min-h-screen px-4 py-8 sm:px-6">
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-sm sm:max-w-md overflow-hidden">
+        <div className="p-6 sm:p-8 md:p-10">
+          <div className="text-center mb-6 sm:mb-8">
+            {badge && (
+              <span className="inline-block bg-[#F3E7CE] text-[#8A5A2B] text-xs sm:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+                {badge}
+              </span>
+            )}
+            <h2 className="font-serif text-xl sm:text-2xl font-semibold text-[#1E4536] break-words">
+              {title}
+            </h2>
+            {subtitle && (
+              <p className="text-[#7A8C7F] text-sm sm:text-base mt-2">
+                {subtitle}
+              </p>
+            )}
+          </div>
+
+          <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
+            {children({ values, handleChange })}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="
+                w-full bg-[#2F6B4F] text-[#FBF7EE] font-semibold
+                px-4 py-2.5 sm:py-3 rounded-full
+                transition-all duration-300
+                hover:bg-[#1E4536]
+                focus:outline-none focus:ring-2 focus:ring-[#4C9A6A] focus:ring-offset-2
+                active:scale-[0.98]
+                disabled:opacity-60
+              "
+            >
+              {isSubmitting ? "Enviando..." : submitLabel}
+            </button>
+
+            {footer}
+          </form>
         </div>
-
-        <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
-          {children({ values, handleChange })}
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="
-              w-full bg-[#22C55E] text-white font-semibold
-              px-4 py-2.5 sm:py-3 rounded-full
-              transition-all duration-300
-              hover:bg-[#16A34A]
-              focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-offset-2
-              active:scale-[0.98]
-              disabled:opacity-60
-            "
-          >
-            {isSubmitting ? "Enviando..." : submitLabel}
-          </button>
-
-          {footer}
-        </form>
       </div>
     </div>
   );
