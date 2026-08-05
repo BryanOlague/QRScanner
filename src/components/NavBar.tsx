@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import {
   FaBars,
@@ -16,17 +16,34 @@ import img from "../../public/images/logo.png";
 {
   /* Rutas de la app */
 }
+
 const navItems = [
   { to: "/", label: "Inicio", icon: FaHome },
   { to: "/qrscanner", label: "Escanear QR", icon: FaQrcode },
-  { to: "/qrcreated", label: "Crear QR", icon: FaPlusCircle },
   { to: "/information", label: "Resultados", icon: FaClipboardList },
+];
+
+const qrOptions = [
+  { value: "/qrcreated", label: "Crear QR" },
+  { value: "/qrexistentes", label: "Ver QR existentes" }, // ajusta esta ruta a la real
 ];
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const currentQrOption = qrOptions.some(
+    (opt) => opt.value === location.pathname,
+  )
+    ? location.pathname
+    : "";
+
+  const handleQrSelect = (value: string) => {
+    if (value) navigate(value);
+  };
 
   {
     /*Cierra el menu del perfil al hacer clic fuera de el  */
@@ -63,6 +80,13 @@ export default function NavBar() {
         : "text-[#2F4A3D] hover:bg-[#E7EFE6] hover:text-[#1E4536]"
     }`;
 
+  const selectClass = (hasValue: boolean) =>
+    `appearance-none cursor-pointer pl-4 pr-8 py-2 rounded-full text-sm lg:text-base font-semibold transition-all duration-300 focus:outline-none ${
+      hasValue
+        ? "bg-[#2F6B4F] text-[#FBF7EE] shadow-sm"
+        : "bg-transparent text-[#2F4A3D] hover:bg-[#E7EFE6] hover:text-[#1E4536]"
+    }`;
+
   return (
     <nav className="relative w-full bg-[#FBF7EE] px-4 sm:px-8 lg:px-12 shadow-sm">
       <div className="flex h-20 items-center justify-between">
@@ -94,6 +118,29 @@ export default function NavBar() {
               </NavLink>
             </li>
           ))}
+
+          <li className="relative">
+            <select
+              value={currentQrOption}
+              onChange={(e) => handleQrSelect(e.target.value)}
+              className={selectClass(currentQrOption !== "")}
+              aria-label="Crear o ver QR"
+            >
+              <option value="" disabled>
+                QR
+              </option>
+              {qrOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            <FaChevronDown
+              className={`pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs ${
+                currentQrOption ? "text-[#FBF7EE]" : "text-[#8A9A8D]"
+              }`}
+            />
+          </li>
         </ul>
 
         {/* ================= PERFIL DESKTOP ================= */}
@@ -163,6 +210,32 @@ export default function NavBar() {
                 </NavLink>
               </li>
             ))}
+
+            <li className="relative w-full">
+              <select
+                value={currentQrOption}
+                onChange={(e) => {
+                  handleQrSelect(e.target.value);
+                  handleNavigate();
+                }}
+                className={`w-full ${selectClass(currentQrOption !== "")}`}
+                aria-label="Crear o ver QR"
+              >
+                <option value="" disabled>
+                  QR
+                </option>
+                {qrOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+              <FaChevronDown
+                className={`pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs ${
+                  currentQrOption ? "text-[#FBF7EE]" : "text-[#8A9A8D]"
+                }`}
+              />
+            </li>
 
             <div className="h-px bg-[#EEE8D8] my-2" />
 

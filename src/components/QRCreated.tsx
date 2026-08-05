@@ -7,15 +7,6 @@ type RegisterValues = {
   name: string;
 };
 
-const fieldBackground = {
-  backgroundColor: "#EEF1E3",
-  backgroundImage:
-    "repeating-linear-gradient(128deg, #EEF1E3 0px, #EEF1E3 40px, #E3E9D4 40px, #E3E9D4 44px)",
-};
-
-const stripePattern =
-  "repeating-linear-gradient(135deg, #1E4536 0 10px, #4C9A6A 10px 20px, #D9A441 20px 24px, #BB6B4C 24px 28px)";
-
 export default function QRCreated() {
   const [qrValue, setQrValue] = useState<string | null>(null);
   const handleSubmit = (values: RegisterValues) => {
