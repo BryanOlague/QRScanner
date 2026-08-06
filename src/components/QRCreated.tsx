@@ -2,7 +2,6 @@ import FormCard from "./FormCard";
 import { TextField } from "./TextField";
 import QRCodeGenerator from "./QRCodeGenerator";
 import { useState } from "react";
-import SearchDialog from "./SearchDialog";
 
 type RegisterValues = {
   name: string;
@@ -17,7 +16,6 @@ export default function QRCreated() {
   if (qrValue) {
     return (
       <div className="flex flex-col bg-[#EEF1E3] items-center justify-center min-h-screen px-4 py-8">
-        <SearchDialog></SearchDialog>
         <div className="relative w-full max-w-sm rounded-2xl bg-white shadow-xl overflow-hidden">
           <div className="h-[6px] w-full" />
 
