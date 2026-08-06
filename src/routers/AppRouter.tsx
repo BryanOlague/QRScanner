@@ -3,12 +3,13 @@ import QRScanner from "../components/QRScanner";
 // import Sidebar from "../components/SideBar";
 import RegisterCard from "../components/RegisterCard";
 import QRCreated from "../components/QRCreated";
+import SearchDialog from "../components/SearchDialog";
 
 export default function AppRouter() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<p>Inico</p>} />
+        <Route path="/" element={<SearchDialog />} />
         <Route path="/qrScanner" element={<QRScanner />} />
         <Route path="/register" element={<RegisterCard />} />
         <Route path="/qrCreated" element={<QRCreated />} />
